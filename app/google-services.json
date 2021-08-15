@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "869514494882",
+    "firebase_url": "https://o-icys-default-rtdb.firebaseio.com",
+    "project_id": "o-icys",
+    "storage_bucket": "o-icys.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869514494882:android:c053320aeb91d02bbf28fb",
+        "android_client_info": {
+          "package_name": "com.example.oicys"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869514494882-av1db08vkt0k7to8jh2ubtsmil1smsqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTx3SStPM8XbpmckmUFBIeW_P_DHzB134"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869514494882-av1db08vkt0k7to8jh2ubtsmil1smsqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
