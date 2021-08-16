@@ -5,6 +5,6 @@
         android:state_selected="false"/>
     <item
         android:state_selected="true"
-        android:drawable="@drawable/tabbar_home_click" />
+        android:drawable="@drawable/tabbar_home_click"/>
 
 </selector>

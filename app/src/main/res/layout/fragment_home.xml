@@ -10,13 +10,101 @@
         android:id="@+id/title1"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:textSize="30dp"
         android:textColor="@color/white"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/oduda_bold_demo"
         android:text="HOME" />
+
+    <TextView
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/tmoney"
+        android:text="대여 만료까지 ~분 남았습니다."
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#424242"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/reservation_box"
+        android:elevation="10dp"
+        />
+
+    <Button
+        android:id="@+id/reserv_1"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="120dp"
+        android:background="@drawable/btshadow"
+        android:elevation="10dp"
+        android:fontFamily="@font/tmoney"
+        android:text="1번"
+        android:textColor="#424242"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/reserv_2"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="120dp"
+        android:background="@drawable/btshadow"
+        android:elevation="10dp"
+        android:fontFamily="@font/tmoney"
+        android:text="2번"
+        android:textColor="#424242"
+        android:textSize="30dp"
+        />
+
+    <Button
+        android:id="@+id/reserv_3"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:background="@drawable/btshadow"
+        android:elevation="10dp"
+        android:fontFamily="@font/tmoney"
+        android:text="3번"
+        android:textColor="#424242"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="480dp"
+        android:layout_marginRight="120dp"
+        />
+
+    <Button
+        android:id="@+id/reserv_4"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:fontFamily="@font/tmoney"
+        android:text="4번"
+        android:textColor="#424242"
+        android:textSize="30dp"
+        android:background="@drawable/btshadow"
+        android:elevation="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="120dp"
+        />
+
+    <TextView
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/tmoney"
+        android:text="현재 이용중인 사물함이 없습니다."
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#424242"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="700dp"
+        android:elevation="10dp"
+        />
 
 
 </FrameLayout>
