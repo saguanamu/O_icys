@@ -17,8 +17,8 @@
             android:layout_width="350dp"
             android:layout_height="670dp"
             android:layout_marginTop="75dp"
-            android:layout_marginLeft="31dp"
-            app:srcCompat="@drawable/title_bg"/>
+            android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/title_bg"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_ac_main_frag_pager"
