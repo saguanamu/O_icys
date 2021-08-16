@@ -30,11 +30,8 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_ac_main_bottom_menu"
-            android:background="#FFFFFF"
+            app:tabBackground="@drawable/tabbar_design"
             android:elevation="5dp"
-            app:tabIndicatorColor="#86a8e7"
-            app:tabIndicatorHeight="52dp"
-            app:tabIndicatorAnimationMode="linear"
             app:tabRippleColor="#86a8e7"
             android:layout_width="match_parent"
             android:layout_height="52dp"
