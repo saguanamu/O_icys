@@ -6,20 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_ac_main_frag_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tl_ac_main_bottom_menu">
-    </androidx.viewpager.widget.ViewPager>
+        <ImageView
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/action_bar_bg"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tl_ac_main_bottom_menu"
-        android:background="#FFFFFF"
-        android:elevation="5dp"
-        app:tabIndicatorColor="#40D39F"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true">
-    </com.google.android.material.tabs.TabLayout>
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="350dp"
+            android:layout_height="670dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginLeft="31dp"
+            app:srcCompat="@drawable/title_bg"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_ac_main_frag_pager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tl_ac_main_bottom_menu">
+        </androidx.viewpager.widget.ViewPager>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_ac_main_bottom_menu"
+            android:background="#FFFFFF"
+            android:elevation="5dp"
+            app:tabIndicatorColor="#40D39F"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentBottom="true">
+        </com.google.android.material.tabs.TabLayout>
+
 </RelativeLayout>
