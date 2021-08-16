@@ -3,7 +3,10 @@ package com.example.oicys
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.RelativeLayout
+import android.widget.TextView
 import com.example.oicys.adapter.MainFragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,6 +14,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) // status hide
+
+        //val mytext : TextView = findViewById(R.id.text_title)
+        //mytext.text = "홈화면"
 
         configureBottomNavigation()
     }
