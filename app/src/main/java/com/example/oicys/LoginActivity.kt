@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
                 val email = firebaseUser!!.email
                 Toast.makeText(this, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
 
-                //open profile
+                //open profile -> main
                 startActivity(Intent(this, ProfileActivity::class.java))
                 finish()
             }

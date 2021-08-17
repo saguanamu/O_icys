@@ -92,7 +92,7 @@ class SignUpActivity : AppCompatActivity() {
                 val email = firebaseUser!!.email
                 Toast.makeText(this, "Account created with eamil $email", Toast.LENGTH_SHORT).show()
 
-                //open profile
+                //open profile -> main
                 startActivity(Intent(this, ProfileActivity::class.java))
                 finish()
             }
