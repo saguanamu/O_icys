@@ -1,11 +1,16 @@
 package com.example.oicys.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import com.example.oicys.LoginActivity
 import com.example.oicys.R
+import com.example.oicys.databinding.FragmentPersonalBinding
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,11 +27,49 @@ class PersonalFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var logoutButton: Button
+
+    //ViewBinding
+    private lateinit var binding: FragmentPersonalBinding
+    //FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+
+        logoutButton = requireView().findViewById(R.id.logoutBtn)
+
+        //init firebase auth
+        firebaseAuth = FirebaseAuth.getInstance()
+        checkUser()
+
+        //handle click, logout
+        logoutButton.setOnClickListener {
+            firebaseAuth.signOut()
+            checkUser()
+        }
+
+    }
+
+    private fun checkUser() {
+        //check user is logged in or not
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser != null){
+            //user not null, user is logged in, get user info
+            val email = firebaseUser.email
+            //set to text view
+            binding.emailTv.text = email
+        }
+        else{
+            //user is null, user is not logged in, goto login activity
+                activity?.let{
+                    val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                }
         }
     }
 
