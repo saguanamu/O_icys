@@ -26,13 +26,18 @@ class PersonalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
     private lateinit var logoutButton: Button
-
     //ViewBinding
     private lateinit var binding: FragmentPersonalBinding
     //FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //logoutButton = view.findViewById(R.id.logoutBtn)
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,20 +46,24 @@ class PersonalFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        logoutButton = requireView().findViewById(R.id.logoutBtn)
-
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
+        //checkUser()
 
+        /*
         //handle click, logout
         logoutButton.setOnClickListener {
             firebaseAuth.signOut()
-            checkUser()
-        }
+            activity?.let{
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            //checkUser()
+        }*/
 
     }
 
+    /*
     private fun checkUser() {
         //check user is logged in or not
         val firebaseUser = firebaseAuth.currentUser
@@ -64,14 +73,13 @@ class PersonalFragment : Fragment() {
             //set to text view
             binding.emailTv.text = email
         }
-        else{
-            //user is null, user is not logged in, goto login activity
-                activity?.let{
-                    val intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
-                }
+        else{ //user is null, user is not logged in, goto login activity
+            activity?.let{
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,6 +88,7 @@ class PersonalFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_personal, container, false)
     }
+
 
     companion object {
         /**

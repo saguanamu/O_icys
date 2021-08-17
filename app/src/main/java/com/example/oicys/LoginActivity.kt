@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
         var firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null){
             //user is already logged in
-            startActivity(Intent(this, ProfileActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

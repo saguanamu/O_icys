@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:background="@color/white"
     tools:context=".SignUpActivity">
 
     <TextView
@@ -12,8 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
         android:text="SignUp"
-        style="@style/TextAppearance.MaterialComponents.Headline4"/>
+        android:fontFamily="@font/tmoney"
+        android:textColor="@color/oicysmain"
+        android:textSize="60dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +25,8 @@
         android:layout_centerHorizontal="true"
         android:text="Create a new SOOKMYUNG account"
         android:layout_below="@+id/titleLabelTv"
-        style="@style/TextAppearance.MaterialComponents.Caption"/>
+        android:textColor="@color/oicysmain"
+        android:fontFamily="@font/tmoney"/>
 
 
     <!--Email-->
@@ -35,8 +40,12 @@
         <EditText
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:hint="Email"
+            android:paddingLeft="10dp"
+            android:textColor="@color/oicysmain"
+            android:fontFamily="@font/tmoney"
+            android:background="@drawable/login"
             android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -52,8 +61,12 @@
         <EditText
             android:id="@+id/passwordEt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColor="@color/oicysmain"
+            android:fontFamily="@font/tmoney"
+            android:background="@drawable/login"
             android:hint="Password"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,10 +74,12 @@
     <!--Login button-->
     <Button
         android:id="@+id/signUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="Sign Up"
         android:layout_below="@+id/passwordTil"
-        android:layout_marginTop="10dp"/>
+        android:fontFamily="@font/tmoney"
+        android:background="@drawable/loginbutton"
+        android:layout_marginTop="30dp"/>
 
 </RelativeLayout>
