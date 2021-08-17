@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.example.oicys.LoginActivity
 import com.example.oicys.R
 import com.example.oicys.databinding.FragmentPersonalBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,14 +29,19 @@ class PersonalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var logoutButton: Button
+    //private lateinit var logoutButton: Button
     //ViewBinding
     private lateinit var binding: FragmentPersonalBinding
     //FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
+    // Email
+    private lateinit var emailTv: TextView
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        emailTv = view.findViewById(R.id.emailTv)
+        getUserProfile()
         //logoutButton = view.findViewById(R.id.logoutBtn)
     }
 
@@ -108,5 +116,21 @@ class PersonalFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun getUserProfile() {
+        // [START get_user_profile]
+        val user = Firebase.auth.currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            //val name = user.displayName
+            val email = user.email
+            emailTv.setText(user.email.toString()).toString()
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            val uid = user.uid
+        }
     }
 }

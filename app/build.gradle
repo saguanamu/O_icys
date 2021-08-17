@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt' //
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -64,6 +65,8 @@ dependencies {
     // Declare the dependencies for any other desired Firebase products
     // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-database:20.0.1'
 }
 apply plugin: "com.google.gms.google-services"
