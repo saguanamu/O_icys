@@ -29,10 +29,13 @@ class PersonalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    //private lateinit var logoutButton: Button
     //private lateinit var logoutButton: Button
     //ViewBinding
-    private lateinit var binding: FragmentPersonalBinding
+    //private lateinit var binding: FragmentPersonalBinding
     //FirebaseAuth
+    //private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
     // Email
     private lateinit var emailTv: TextView
@@ -55,7 +58,7 @@ class PersonalFragment : Fragment() {
         }
 
         //init firebase auth
-        firebaseAuth = FirebaseAuth.getInstance()
+        //firebaseAuth = FirebaseAuth.getInstance()
         //checkUser()
 
         /*

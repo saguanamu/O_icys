@@ -72,7 +72,7 @@ class SignUpActivity : AppCompatActivity() {
         }
         else if (password.length <6){
             //password length is less than 6
-            binding.passwordEt.error = "Password must atleast 6 chracters long"
+            binding.passwordEt.error = "Password must at least 6 chracters long"
         }
         else{
             //data is valid, continue signup
@@ -92,9 +92,10 @@ class SignUpActivity : AppCompatActivity() {
                 //get current user
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                Toast.makeText(this, "Account created with eamil $email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Account created with email $email", Toast.LENGTH_SHORT).show()
+                firebaseUser.sendEmailVerification()
 
-                //open profile -> main
+                //open main
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
