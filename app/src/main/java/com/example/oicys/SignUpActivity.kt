@@ -32,10 +32,12 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Configure Actionbar,  //enable back button
+        /*
         actionBar = supportActionBar!!
         actionBar.title = "Sign Up"
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayShowHomeEnabled(true)
+         */
 
         //configure progress dialog
         progressDialog = ProgressDialog(this)

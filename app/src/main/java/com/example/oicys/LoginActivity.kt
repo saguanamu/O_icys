@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     //ActionBar
-    private lateinit var actionBar: ActionBar
+    //private lateinit var actionBar: ActionBar
 
     //ProgressDialog
     private lateinit var progressDialog: ProgressDialog
@@ -36,8 +36,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //contigure actionbar
-        actionBar= supportActionBar!!
-        actionBar.title = "Login"
+       //actionBar= supportActionBar!!
+       // actionBar.title = "Login"
 
         //configure progress dialog
         progressDialog = ProgressDialog(this)
@@ -94,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
 
                 //open profile
-                startActivity(Intent(this, ProfileActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             .addOnFailureListener { e->
