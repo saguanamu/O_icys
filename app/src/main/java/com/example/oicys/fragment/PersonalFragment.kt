@@ -26,16 +26,17 @@ class PersonalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var logoutButton: Button
-    //ViewBinding
-    private lateinit var binding: FragmentPersonalBinding
-    //FirebaseAuth
-    private lateinit var firebaseAuth: FirebaseAuth
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    //private lateinit var logoutButton: Button
+    //ViewBinding
+    //private lateinit var binding: FragmentPersonalBinding
+    //FirebaseAuth
+    //private lateinit var firebaseAuth: FirebaseAuth
+
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //logoutButton = view.findViewById(R.id.logoutBtn)
-    }
+    }*/
 
 
 
@@ -47,7 +48,7 @@ class PersonalFragment : Fragment() {
         }
 
         //init firebase auth
-        firebaseAuth = FirebaseAuth.getInstance()
+        //firebaseAuth = FirebaseAuth.getInstance()
         //checkUser()
 
         /*
