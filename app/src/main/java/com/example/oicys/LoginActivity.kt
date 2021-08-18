@@ -95,8 +95,8 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     //login failed
                     progressDialog.dismiss()
-                    val firebaseUser = firebaseAuth.currentUser
-                    val email = firebaseUser!!.email
+                    //val firebaseUser = firebaseAuth.currentUser
+                    //val email = firebaseUser!!.email
                     updateUI(null)
                     Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
                 }
@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         /*else {
-            Toast.makeText(baseContext, "Login failed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
         }*/
     }
 }
