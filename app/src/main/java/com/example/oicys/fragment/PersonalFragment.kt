@@ -14,6 +14,7 @@ import com.example.oicys.databinding.FragmentPersonalBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_personal.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,13 +53,13 @@ class PersonalFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
 
         //init firebase auth
-        //firebaseAuth = FirebaseAuth.getInstance()
         //checkUser()
 
         /*
@@ -97,7 +98,18 @@ class PersonalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal, container, false)
+        val v = inflater.inflate(R.layout.fragment_personal, container, false)
+
+        val bt = v.findViewById<Button>(R.id.logout_bt)
+        bt.setOnClickListener {
+            firebaseAuth = FirebaseAuth.getInstance()
+            firebaseAuth.signOut()
+            activity?.let{
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return v
     }
 
 

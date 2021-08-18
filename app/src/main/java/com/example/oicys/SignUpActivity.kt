@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.example.oicys.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SignUpActivity : AppCompatActivity() {
     //ViewBinding
@@ -49,12 +50,10 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         //handle click, begin signup
-        binding.verifyBtn.setOnClickListener {
+
+        binding.signupBtn.setOnClickListener {
             //validate data
             validateData()
-        }
-        binding.signUpBtn.setOnClickListener {
-            firebaseSignUp()
         }
 
     }
@@ -78,22 +77,28 @@ class SignUpActivity : AppCompatActivity() {
             binding.passwordEt.error = "Password must at least 6 chracters long"
         }
         else{
-            verifyEmail()
             //data is valid, continue signup
-            //firebaseSignUp()
+            firebaseSignUp()
         }
     }
 
-    private fun verifyEmail() {
+    /*private fun verifyEmail() {
 
+        email = binding.emailEt.text.toString().trim()
         val firebaseUser = firebaseAuth.currentUser
-        firebaseUser?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    binding.signUpBtn.isEnabled = true
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            //invalid email format
+            binding.emailEt.error = "Invalid email format"
+        }
+        else{
+            firebaseUser?.sendEmailVerification()
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        binding.signUpBtn.isEnabled = true
+                    }
                 }
-            }
-    }
+        }
+    }*/
 
     private fun firebaseSignUp() {
         //show progress
@@ -101,25 +106,23 @@ class SignUpActivity : AppCompatActivity() {
 
         //create account
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-
-                progressDialog.dismiss()
-
-                //get current user
-                val firebaseUser = firebaseAuth.currentUser
-                val email = firebaseUser!!.email
-                Toast.makeText(this, "Account created with email $email", Toast.LENGTH_SHORT).show()
-
-                //open main
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-
-
-            }
-            .addOnFailureListener{e->
-                //signup failed
-                progressDialog.dismiss()
-                Toast.makeText(this, "SignUp Failed due to ${e.message}", Toast.LENGTH_SHORT).show()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful){
+                    val user:FirebaseUser? = firebaseAuth.currentUser
+                    user?.sendEmailVerification()
+                        ?.addOnCompleteListener { task ->
+                            if (task.isSuccessful){
+                                startActivity(Intent(this, LoginActivity::class.java))
+                                finish()
+                            }
+                        }
+                }
+                else{
+                    Toast.makeText(
+                        baseContext, "Sign Up failed. Try again after some time",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
 
     }

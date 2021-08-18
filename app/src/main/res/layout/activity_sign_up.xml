@@ -73,20 +73,10 @@
 
     <!--Login button-->
     <Button
-        android:id="@+id/signUpBtn"
+        android:id="@+id/signupBtn"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="Sign Up"
-        android:layout_below="@+id/passwordTil"
-        android:fontFamily="@font/tmoney"
-        android:background="@drawable/loginbutton"
-        android:layout_marginTop="90dp"
-        android:enabled="false"/>
-    <Button
-        android:id="@+id/verifyBtn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Verify"
         android:layout_below="@+id/passwordTil"
         android:fontFamily="@font/tmoney"
         android:background="@drawable/loginbutton"

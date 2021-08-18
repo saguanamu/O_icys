@@ -108,10 +108,23 @@ class LoginActivity : AppCompatActivity() {
         //if user is already logged in go to profile activity
         //get current user
         var firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null){
-            //user is already logged in
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+        if (firebaseUser != null){ //user is already logged in
+            if (firebaseUser.isEmailVerified){
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+            else{
+                Toast.makeText(
+                    baseContext, "Please verify your email address",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        else{
+            Toast.makeText(
+                baseContext, "Login failed",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
