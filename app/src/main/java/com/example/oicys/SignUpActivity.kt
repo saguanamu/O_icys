@@ -49,9 +49,12 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         //handle click, begin signup
-        binding.signUpBtn.setOnClickListener {
+        binding.verifyBtn.setOnClickListener {
             //validate data
             validateData()
+        }
+        binding.signUpBtn.setOnClickListener {
+            firebaseSignUp()
         }
 
     }
@@ -75,9 +78,21 @@ class SignUpActivity : AppCompatActivity() {
             binding.passwordEt.error = "Password must at least 6 chracters long"
         }
         else{
+            verifyEmail()
             //data is valid, continue signup
-            firebaseSignUp()
+            //firebaseSignUp()
         }
+    }
+
+    private fun verifyEmail() {
+
+        val firebaseUser = firebaseAuth.currentUser
+        firebaseUser?.sendEmailVerification()
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful){
+                    binding.signUpBtn.isEnabled = true
+                }
+            }
     }
 
     private fun firebaseSignUp() {
@@ -87,17 +102,19 @@ class SignUpActivity : AppCompatActivity() {
         //create account
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                //signup success
+
                 progressDialog.dismiss()
+
                 //get current user
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
                 Toast.makeText(this, "Account created with email $email", Toast.LENGTH_SHORT).show()
-                firebaseUser.sendEmailVerification()
 
                 //open main
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
+
+
             }
             .addOnFailureListener{e->
                 //signup failed
