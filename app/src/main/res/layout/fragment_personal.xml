@@ -18,14 +18,113 @@
         android:fontFamily="@font/oduda_bold_demo"
         android:text="SETTINGS" />
 
+    <ImageView
+        android:id="@+id/user_face"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/default_person"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="250dp"
+        android:textSize="30dp"
+        android:text="파라송"
+        android:fontFamily="@font/tmoney"
+        android:textColor="@color/oicysmain"
+        />
+
     <TextView
         android:id="@+id/emailTv"
         android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
+        android:layout_height="30dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="200dp"
         android:layout_marginBottom="250dp"
-        android:textColor="@color/oicysmain"
+        android:textSize="20dp"
+        android:fontFamily="@font/tmoney"
+        android:textColor="#585858"
         />
+    
+    <View
+        android:background="@color/oicysmain"
+        android:layout_marginTop="260dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="2px"/>
+
+    <Button
+        android:id="@+id/setting_1"
+        android:background="#FFFFFF"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:elevation="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="280dp"
+        android:text="알림"
+        android:fontFamily="@font/tmoney"
+        android:textColor="#424242"
+        />
+
+    <Button
+        android:id="@+id/setting_2"
+        android:background="#FFFFFF"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:elevation="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="335dp"
+        android:text="개인정보 수정"
+        android:fontFamily="@font/tmoney"
+        android:textColor="#424242"
+        />
+
+    <Button
+        android:id="@+id/setting_3"
+        android:background="#FFFFFF"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:elevation="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="390dp"
+        android:text="공지사항"
+        android:fontFamily="@font/tmoney"
+        android:textColor="#424242"
+        />
+
+    <Button
+        android:id="@+id/logout_bt"
+        android:background="#FFFFFF"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:elevation="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="450dp"
+        android:text="로그아웃"
+        android:fontFamily="@font/tmoney"
+        android:textColor="#424242"
+        />
+
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="@font/tmoney"
+        android:layout_marginTop="500dp"
+        android:textSize="10dp"
+        android:text="All rights reserved by 2021 SMWU MEIT Team Parasong"
+        android:textColor="#848484"/>
+
 
 
 
