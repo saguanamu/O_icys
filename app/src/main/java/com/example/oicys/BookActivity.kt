@@ -1,13 +1,8 @@
-package com.example.oicys.fragment
+package com.example.oicys
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import com.example.oicys.LockerDB
-import com.example.oicys.R
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
@@ -16,25 +11,12 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class BookActivity : AppCompatActivity() {
 
     // 전달될 정보 값
     var lockerNum: Int? = 0 // 사물함 번호
@@ -55,21 +37,16 @@ class HomeFragment : Fragment() {
     private var mDatabaseRef: DatabaseReference? = null
     private var mDatabase: DatabaseReference? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view:View = inflater!!.inflate(R.layout.fragment_home, container, false)
-        // Inflate the layout for this fragment
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.fragment_home)
 
         mDatabaseRef = FirebaseDatabase.getInstance().reference.child("lockers")
         mDatabase = FirebaseDatabase.getInstance().reference
 
         // 사물함 버튼
-        var reservArray = arrayOf(view.reserv_1, view.reserv_2,
-            view.reserv_3, view.reserv_4)
+        var reservArray = arrayOf(reserv_1, reserv_2,reserv_3, reserv_4)
 
         // 사물함 예약 상태 받아와서 알려주는 코드 필요 (가장 최근의 로그)
 
@@ -85,44 +62,20 @@ class HomeFragment : Fragment() {
 
         val cal = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-        val date: Date = df.parse("2021-08-19T12:30:30+0530")
-        Toast.makeText(context, "테스트", Toast.LENGTH_SHORT).show()
+        val date:Date = df.parse("2021-08-19T12:30:30+0530")
+        Toast.makeText(this@BookActivity, "테스트", Toast.LENGTH_SHORT).show()
         // 예약 가능한 사물함에 한하여 클릭 가능하게
-
         for(i in 0 until 4){ // 버튼 작업 부여
             reservArray[i].setOnClickListener(){
                 // 새 창 떠서 비밀번호, 날짜 받아오는 코드
 
-                infoSave(i+1, "1234", date, "delivery")
-                Toast.makeText(context, "버튼 생성", Toast.LENGTH_SHORT).show()
+                infoSave(i.toString(), "1234", date, "delivery")
+                Toast.makeText(this@BookActivity, "버튼 생성", Toast.LENGTH_SHORT).show()
             }
         }
-        return view
-
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
-
-    fun infoSave(num:Int?, pw:String?, start: Date?, stat:String?){
+    fun infoSave(num:String?, pw:String?, start:Date?, stat:String?){
         val cal = Calendar.getInstance()
 
         val user = Firebase.auth.currentUser
@@ -133,7 +86,6 @@ class HomeFragment : Fragment() {
             lockerUser = user.uid
             lockerStart = start
             lockerStat = stat
-            lockerNum = num
 
             // time
             cal.time = lockerStart
@@ -172,29 +124,29 @@ class HomeFragment : Fragment() {
 
         childUpdates["/lockers/$lockerNum"] = lockValues
 
-        mDatabase?.updateChildren(childUpdates)
-            ?.addOnSuccessListener(OnSuccessListener<Void?> {
-                Toast.makeText(context, "예약을 완료했습니다.", Toast.LENGTH_SHORT).show()
+       mDatabase?.updateChildren(childUpdates)
+           ?.addOnSuccessListener(OnSuccessListener<Void?> {
+               Toast.makeText(this@BookActivity, "예약을 완료했습니다.", Toast.LENGTH_SHORT).show()
 
 
-                // 파이어베이스에 예약한 사용자 정보 추가
-                val database = FirebaseDatabase.getInstance()
-                val user = FirebaseAuth.getInstance().currentUser // 로그인한 유저 정보 가져오기
-                val uid = user?.uid // 로그인한 유저의 고유 uid 가져오기
-                val mDatabaseRef =
-                    database.getReference("/users/$uid") // 유저 찾기
-
-
-
-                mDatabaseRef.child("status").setValue(lockerStat)
-                mDatabaseRef.child("lockerNumber").setValue(lockerNum)
+               // 파이어베이스에 예약한 사용자 정보 추가
+               val database = FirebaseDatabase.getInstance()
+               val user = FirebaseAuth.getInstance().currentUser // 로그인한 유저 정보 가져오기
+               val uid = user?.uid // 로그인한 유저의 고유 uid 가져오기
+               val mDatabaseRef =
+                   database.getReference("/users/$uid") // 유저 찾기
 
 
 
-            })
+               mDatabaseRef.child("status").setValue(lockerStat)
+               mDatabaseRef.child("lockerNumber").setValue(lockerNum)
+
+
+
+           })
             ?.addOnFailureListener(OnFailureListener {
                 Toast.makeText(
-                    context,
+                    this@BookActivity,
                     "저장을 실패했습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
