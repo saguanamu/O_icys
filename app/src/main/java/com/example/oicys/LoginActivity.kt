@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import com.example.oicys.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //contigure actionbar
-       //actionBar= supportActionBar!!
-       // actionBar.title = "Login"
+        //actionBar= supportActionBar!!
+        // actionBar.title = "Login"
 
         //configure progress dialog
         progressDialog = ProgressDialog(this)
@@ -47,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
 
         //init firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
 
         //handle click, open SignUpActivity
         binding.noAccountTv.setOnClickListener {
@@ -57,25 +57,23 @@ class LoginActivity : AppCompatActivity() {
         //handle click, begin login
         binding.loginBtn.setOnClickListener {
             //before logging in, validate data
-            validateData()
+            doLogin()
         }
     }
 
-    private fun validateData() {
+    private fun doLogin() {
         //get data
         email = binding.emailEt.text.toString().trim()
         password = binding.passwordEt.text.toString().trim()
 
         //validate data
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             //invalid email format
             binding.emailEt.error = "Invalid email format"
-        }
-        else if(TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             //no password entered
             binding.passwordEt.error = "Please enter password"
-        }
-        else{
+        } else {
             //data is validated, begin login
             firebaseLogin()
         }
@@ -85,46 +83,44 @@ class LoginActivity : AppCompatActivity() {
         //show progress
         progressDialog.show()
         firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                //login success
-                progressDialog.dismiss()
-                //get user info
-                val firebaseUser = firebaseAuth.currentUser
-                val email = firebaseUser!!.email
-                Toast.makeText(this, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
-
-                //open profile
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-            .addOnFailureListener { e->
-                //login failed
-                progressDialog.dismiss()
-                Toast.makeText(this, "Login failed due to $(e.message)", Toast.LENGTH_SHORT).show()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    //login success
+                    progressDialog.dismiss()
+                    //get user info
+                    val firebaseUser = firebaseAuth.currentUser
+                    val email = firebaseUser!!.email
+                    updateUI(firebaseUser)
+                    Toast.makeText(this, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
+                } else {
+                    //login failed
+                    progressDialog.dismiss()
+                    val firebaseUser = firebaseAuth.currentUser
+                    val email = firebaseUser!!.email
+                    updateUI(null)
+                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                }
             }
     }
 
-    private fun checkUser() {
-        //if user is already logged in go to profile activity
-        //get current user
-        var firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null){ //user is already logged in
-            if (firebaseUser.isEmailVerified){
+    override fun onStart() {
+        super.onStart()
+        val currentUser: FirebaseUser? = firebaseAuth.currentUser
+        updateUI(currentUser)
+    }
+
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
+            if (currentUser.isEmailVerified) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-            }
-            else{
-                Toast.makeText(
-                    baseContext, "Please verify your email address",
-                    Toast.LENGTH_SHORT
-                ).show()
+            } else {
+                Toast.makeText(baseContext, "Please verify your email address", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
-        else{
-            Toast.makeText(
-                baseContext, "Login failed",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        /*else {
+            Toast.makeText(baseContext, "Login failed", Toast.LENGTH_SHORT).show()
+        }*/
     }
 }
