@@ -23,15 +23,15 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="150dp"
-        android:layout_marginLeft="80dp"
-        android:background="@drawable/default_person"/>
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/snow"/>
 
-    <TextView
+    <EditText
         android:id="@+id/user_name"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="250dp"
         android:textSize="30dp"
         android:text="파라송"
@@ -41,12 +41,12 @@
 
     <TextView
         android:id="@+id/emailTv"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="210dp"
         android:layout_marginBottom="250dp"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:fontFamily="@font/tmoney"
         android:textColor="#585858"
         />
@@ -58,21 +58,7 @@
         android:layout_width="350dp"
         android:layout_height="2px"/>
 
-    <Button
-        android:id="@+id/setting_1"
-        android:background="#FFFFFF"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:elevation="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="280dp"
-        android:text="알림"
-        android:fontFamily="@font/tmoney"
-        android:textColor="#424242"
-        />
-
-    <Button
+    <!--<Button
         android:id="@+id/setting_2"
         android:background="#FFFFFF"
         android:layout_width="350dp"
@@ -80,11 +66,11 @@
         android:gravity="center_vertical"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="335dp"
-        android:text="개인정보 수정"
+        android:layout_marginTop="280dp"
+        android:text="  개인정보 수정"
         android:fontFamily="@font/tmoney"
         android:textColor="#424242"
-        />
+        />-->
 
     <Button
         android:id="@+id/setting_3"
@@ -94,8 +80,8 @@
         android:gravity="center_vertical"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="390dp"
-        android:text="공지사항"
+        android:layout_marginTop="335dp"
+        android:text="  탈퇴"
         android:fontFamily="@font/tmoney"
         android:textColor="#424242"
         />
@@ -108,8 +94,8 @@
         android:gravity="center_vertical"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="450dp"
-        android:text="로그아웃"
+        android:layout_marginTop="280dp"
+        android:text="  로그아웃"
         android:fontFamily="@font/tmoney"
         android:textColor="#424242"
         />
@@ -120,7 +106,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:fontFamily="@font/tmoney"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="400dp"
         android:textSize="10dp"
         android:text="All rights reserved by 2021 SMWU MEIT Team Parasong"
         android:textColor="#848484"/>

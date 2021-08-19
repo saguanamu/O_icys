@@ -19,29 +19,40 @@
         android:fontFamily="@font/oduda_bold_demo"
         android:text="HOME" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_refresh"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="160dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btrefresh"
+        android:padding="10dp"
+        android:src="@drawable/reload_1"/>
     <TextView
         android:id="@+id/tv_timeInfo"
         android:layout_width="380dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/tmoney"
-        android:text="대여 만료까지 ~분 남았습니다."
+        android:text="-"
         android:textSize="20dp"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="#424242"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="170dp"
         android:background="@drawable/reservation_box"
         android:elevation="10dp"
         />
 
     <Button
         android:id="@+id/reserv_1"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/btshadow"
         android:elevation="10dp"
         android:fontFamily="@font/tmoney"
@@ -51,11 +62,11 @@
 
     <Button
         android:id="@+id/reserv_2"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="100dp"
         android:background="@drawable/btshadow"
         android:elevation="10dp"
         android:fontFamily="@font/tmoney"
@@ -66,7 +77,7 @@
 
     <Button
         android:id="@+id/reserv_3"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:background="@drawable/btshadow"
         android:elevation="10dp"
@@ -75,13 +86,13 @@
         android:textColor="#424242"
         android:textSize="30dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="480dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginRight="100dp"
         />
 
     <Button
         android:id="@+id/reserv_4"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:fontFamily="@font/tmoney"
         android:text="4번"
@@ -90,8 +101,8 @@
         android:background="@drawable/btshadow"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="480dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="100dp"
         />
 
     <TextView
@@ -99,7 +110,7 @@
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:fontFamily="@font/tmoney"
-        android:text="현재 이용중인 사물함이 없습니다."
+        android:text="현재 이용 중인 사물함이 없습니다."
         android:textSize="20dp"
         android:textAlignment="center"
         android:gravity="center"

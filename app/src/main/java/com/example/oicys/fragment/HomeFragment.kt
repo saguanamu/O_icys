@@ -1,9 +1,10 @@
 package com.example.oicys.fragment
 
+import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.Log
@@ -12,7 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.oicys.LockerDB
+import com.example.oicys.MainActivity
 import com.example.oicys.R
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -224,13 +228,37 @@ class HomeFragment : Fragment() {
         }
 
 
+        // 새로고침 버튼
+        view.bt_refresh.setOnClickListener {
 
+            val intent = Intent(context,MainActivity::class.java)
 
+            intent.apply {
+                this.putExtra("status","refresh") // 데이터 넣기
+                this.putExtra("fragment",2) // 데이터 넣기
+            }
 
+            startActivity(intent)
+
+        }
 
 
 
         return view
+
+    }
+
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+        var ft2: FragmentTransaction = fragmentManager.beginTransaction()
+        // ft2.detach(fragment).attach(fragment).commit()
+
+
+        // fragment reload
+        ft2 = childFragmentManager.beginTransaction()
+        if (Build.VERSION.SDK_INT >= 26) {
+            ft2.setReorderingAllowed(false)
+        }
+        ft2.detach(fragment).attach(fragment).commit()
 
     }
 
@@ -341,4 +369,6 @@ class HomeFragment : Fragment() {
                 }
             }
     }
+
+
 }

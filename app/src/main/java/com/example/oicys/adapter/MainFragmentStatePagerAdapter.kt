@@ -8,8 +8,8 @@ import com.example.oicys.fragment.*
 class MainFragmentStatePagerAdapter(fm : FragmentManager, val fragmentCount : Int) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
         when(position) {
-            0 -> return WeatherFragment()
-            1 -> return HomeFragment()
+            0 -> return HomeFragment()
+            1 -> return WeatherFragment()
             2 -> return PersonalFragment()
             else -> return HomeFragment()
         }
