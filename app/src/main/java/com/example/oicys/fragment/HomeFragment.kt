@@ -1,25 +1,26 @@
 package com.example.oicys.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.oicys.LockerDB
 import com.example.oicys.R
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import java.lang.Integer.parseInt
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,9 +71,8 @@ class HomeFragment : Fragment() {
         // 사물함 버튼
         var reservArray = arrayOf(view.reserv_1, view.reserv_2,
             view.reserv_3, view.reserv_4)
-
-        // 사물함 예약 상태 받아와서 알려주는 코드 필요 (가장 최근의 로그)
-
+        // 사물함 상태
+        var sttArray = arrayOf("null","null","null","null")
 
 
         // 사용자 불러오기
@@ -87,7 +87,61 @@ class HomeFragment : Fragment() {
         val df: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
         val date: Date = df.parse("2021-08-19T12:30:30+0530")
         Toast.makeText(context, "테스트", Toast.LENGTH_SHORT).show()
+
         // 예약 가능한 사물함에 한하여 클릭 가능하게
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post : String? = dataSnapshot.child("lockerStatus").getValue(String::class.java)
+                val num : String? = dataSnapshot.child("lockerNumber").getValue(String::class.java)
+
+                val nm:Int?
+                if (num != null) {
+                    nm= parseInt(num)
+                if (post != null) {
+                    sttArray[nm-1] = post
+                    Log.i("TAG: value is ", post)
+                    Log.i("TAG: nm is ", num)
+                    // 사물함 적용
+                    if(post == statArray[0]){ // 배달
+                        reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
+                        reservArray[nm-1].isEnabled = false
+                        Log.i("TAG: this value is ", statArray[0])
+                    } else if (post == statArray[1]){ // 거래
+                        reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
+                        reservArray[nm-1].isEnabled = false
+                        Log.i("TAG: this value is ", statArray[1])
+                    }else if (post == statArray[2]){ // 임시보관
+                        reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
+                        reservArray[nm-1].isEnabled = false
+                        Log.i("TAG: this value is ", statArray[2])
+                    }else {
+                        Log.i("TAG: this value is ", "empty")
+                    }
+                }
+
+
+
+                }
+
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("TAG: ", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+
+        // 사물함 상태 불러오기
+        mDatabaseRef!!.child("1").addValueEventListener(postListener)
+        mDatabaseRef!!.child("2").addValueEventListener(postListener)
+        mDatabaseRef!!.child("3").addValueEventListener(postListener)
+        mDatabaseRef!!.child("4").addValueEventListener(postListener)
+
+        // 사물함에 적용
+        for(i in 0 until 4){ // 예약 상태에 따라 스타일 변화
+
+            Log.i("TAG: sttArray is ", sttArray[i])
+        }
 
         for(i in 0 until 4){ // 버튼 작업 부여
             reservArray[i].setOnClickListener(){
@@ -97,29 +151,11 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "버튼 생성", Toast.LENGTH_SHORT).show()
             }
         }
+
         return view
 
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
 
     fun infoSave(num:Int?, pw:String?, start: Date?, stat:String?){
@@ -158,14 +194,21 @@ class HomeFragment : Fragment() {
         // String key = mDatabase.child("rooms").push().getKey();
         val stringStart = df.format(lockST)
         val stringEnd = df.format(lockED)
+// 현재시간을 가져오기
+        val now: Long = System.currentTimeMillis()
+// 현재 시간을 Date 타입으로 변환
+        val date = Date(now)
+// 현재 시간을 dateFormat 에 선언한 형태의 String 으로 변환
+        val thisTime:String? = df.format(date)
 
         val lockDB = LockerDB(
-            lockerNum,
+            lockNB,
             lockerPW,
             lockerStat,
             lockerUser,
             stringStart,
-            stringEnd
+            stringEnd,
+        thisTime
         )
         val lockValues: Map<String, Any?> = lockDB.toMap()
         val childUpdates: MutableMap<String, Any?> = HashMap()
@@ -199,7 +242,25 @@ class HomeFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             })
+    }
 
-
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment HomeFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
     }
 }

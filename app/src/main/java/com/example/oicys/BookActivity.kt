@@ -110,14 +110,15 @@ class BookActivity : AppCompatActivity() {
         // String key = mDatabase.child("rooms").push().getKey();
         val stringStart = df.format(lockST)
         val stringEnd = df.format(lockED)
-
+val thisTime = null
         val lockDB = LockerDB(
             lockerNum,
             lockerPW,
             lockerStat,
             lockerUser,
             stringStart,
-            stringEnd
+            stringEnd,
+            thisTime
         )
         val lockValues: Map<String, Any?> = lockDB.toMap()
         val childUpdates: MutableMap<String, Any?> = HashMap()
