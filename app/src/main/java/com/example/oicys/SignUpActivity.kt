@@ -26,19 +26,12 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var email = ""
     private var password = ""
+    private var cpassword = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //Configure Actionbar,  //enable back button
-        /*
-        actionBar = supportActionBar!!
-        actionBar.title = "Sign Up"
-        actionBar.setDisplayHomeAsUpEnabled(true)
-        actionBar.setDisplayShowHomeEnabled(true)
-         */
 
         //configure progress dialog
         progressDialog = ProgressDialog(this)
@@ -61,6 +54,8 @@ class SignUpActivity : AppCompatActivity() {
         //get data
         email = binding.emailEt.text.toString().trim()
         password = binding.passwordEt.text.toString().trim()
+        cpassword = binding.cpasswordEt.text.toString().trim()
+
         val regex = "sookmyung.ac.kr".toRegex()
         val match = regex.find(email)
 
@@ -76,6 +71,14 @@ class SignUpActivity : AppCompatActivity() {
             //password isn't entered
             binding.passwordEt.error = "Please enter password"
         }
+        else if (TextUtils.isEmpty(cpassword)){
+            //password isn't entered
+            binding.cpasswordEt.error = "Please confirm password"
+        }
+        else if (password != cpassword) {
+            //password isn't cpassword
+            binding.cpasswordEt.error = "Please confirm password again"
+        }
         else if (password.length <6){
             //password length is less than 6
             binding.passwordEt.error = "Password must at least 6 chracters long"
@@ -85,24 +88,6 @@ class SignUpActivity : AppCompatActivity() {
             firebaseSignUp()
         }
     }
-
-    /*private fun verifyEmail() {
-
-        email = binding.emailEt.text.toString().trim()
-        val firebaseUser = firebaseAuth.currentUser
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            //invalid email format
-            binding.emailEt.error = "Invalid email format"
-        }
-        else{
-            firebaseUser?.sendEmailVerification()
-                ?.addOnCompleteListener { task ->
-                    if (task.isSuccessful){
-                        binding.signUpBtn.isEnabled = true
-                    }
-                }
-        }
-    }*/
 
     private fun firebaseSignUp() {
         //show progress

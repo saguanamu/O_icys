@@ -84,7 +84,7 @@
         android:layout_marginTop="90dp"/>
 
     <EditText
-        android:id="@+id/password_verified"
+        android:id="@+id/cpasswordEt"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/login"
