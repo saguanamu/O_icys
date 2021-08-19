@@ -80,6 +80,16 @@ class PersonalFragment : Fragment() {
             }
         }
 
+        val bt2 = v.findViewById<Button>(R.id.setting_3)
+        bt2.setOnClickListener {
+            FirebaseAuth.getInstance().currentUser!!.delete()
+            FirebaseAuth.getInstance().signOut()
+            activity?.let{
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         /*databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
         val uname = user_name.text.toString()
@@ -96,6 +106,9 @@ class PersonalFragment : Fragment() {
         }*/
 
         return v
+    }
+
+    private fun deleted() {
     }
 
 
