@@ -97,27 +97,27 @@ class HomeFragment : Fragment() {
                 val nm:Int?
                 if (num != null) {
                     nm= parseInt(num)
-                if (post != null) {
-                    sttArray[nm-1] = post
-                    Log.i("TAG: value is ", post)
-                    Log.i("TAG: nm is ", num)
-                    // 사물함 적용
-                    if(post == statArray[0]){ // 배달
-                        reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
-                        reservArray[nm-1].isEnabled = false
-                        Log.i("TAG: this value is ", statArray[0])
-                    } else if (post == statArray[1]){ // 거래
-                        reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
-                        reservArray[nm-1].isEnabled = false
-                        Log.i("TAG: this value is ", statArray[1])
-                    }else if (post == statArray[2]){ // 임시보관
-                        reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
-                        reservArray[nm-1].isEnabled = false
-                        Log.i("TAG: this value is ", statArray[2])
-                    }else {
-                        Log.i("TAG: this value is ", "empty")
+                    if (post != null) {
+                        sttArray[nm-1] = post
+                        Log.i("TAG: value is ", post)
+                        Log.i("TAG: nm is ", num)
+                        // 사물함 적용
+                        if(post == statArray[0]){ // 배달
+                            reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
+                            reservArray[nm-1].isEnabled = false
+                            Log.i("TAG: this value is ", statArray[0])
+                        } else if (post == statArray[1]){ // 거래
+                            reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
+                            reservArray[nm-1].isEnabled = false
+                            Log.i("TAG: this value is ", statArray[1])
+                        }else if (post == statArray[2]){ // 임시보관
+                            reservArray[nm-1].setBackgroundResource(R.drawable.btshadow_non)
+                            reservArray[nm-1].isEnabled = false
+                            Log.i("TAG: this value is ", statArray[2])
+                        }else {
+                            Log.i("TAG: this value is ", "empty")
+                        }
                     }
-                }
                 }
 
             }
@@ -139,7 +139,10 @@ class HomeFragment : Fragment() {
             reservArray[i].setOnClickListener(){
                 // 새 창 떠서 비밀번호, 날짜 받아오는 코드
 
-                infoSave(i+1, "1234", date, "delivery")
+                val args = this.arguments
+                val inputData = args?.get("pw")
+                val reservData = args?.get("stat")
+                infoSave(i+1, inputData.toString(), date, reservData.toString())
                 Toast.makeText(context, "버튼 생성", Toast.LENGTH_SHORT).show()
             }
         }
@@ -283,7 +286,7 @@ class HomeFragment : Fragment() {
             lockerUser,
             stringStart,
             stringEnd,
-        thisTime
+            thisTime
         )
         val lockValues: Map<String, Any?> = lockDB.toMap()
         val childUpdates: MutableMap<String, Any?> = HashMap()

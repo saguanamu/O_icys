@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reserv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:textColor="@color/oicysmain"
+            android:textSize="60dp"
+            android:layout_gravity="center"
+            android:text="예약"
+            android:fontFamily="@font/tmoney"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="400dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/btshadow"
+            android:hint="사용자 이름"
+            android:paddingLeft="10dp"
+            android:textColor="@color/oicysmain" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="400dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/btshadow"
+            android:hint="예약 시 사용할 비밀번호"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textColor="@color/oicysmain" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/status_delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/oicysmain"
+                    android:text="배달"
+                    android:textColor="@color/oicysmain" />
+
+                <RadioButton
+                    android:id="@+id/status_sell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/oicysmain"
+                    android:text="거래"
+                    android:textColor="@color/oicysmain" />
+
+                <RadioButton
+                    android:id="@+id/status_tempo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/oicysmain"
+                    android:text="임시보관"
+                    android:textColor="@color/oicysmain" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/btshadow"
+                    android:text="취소"
+
+                    android:textColor="@color/oicysmain" />
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/loginbutton"
+                    android:text="저장" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

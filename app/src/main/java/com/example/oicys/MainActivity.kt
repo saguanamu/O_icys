@@ -1,26 +1,32 @@
 package com.example.oicys
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.oicys.adapter.MainFragmentStatePagerAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.example.oicys.databinding.ActivityMainBinding
+import com.example.oicys.fragment.ReservationFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //setContentView(R.layout.activity_main)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) // status hide
-
         // bottomnavi
         configureBottomNavigation()
+
+        // 프래그먼트 전환
+        supportFragmentManager.beginTransaction().replace(R.id.main, ReservationFragment()).commit()
     }
 
     private fun configureBottomNavigation(){
@@ -33,4 +39,6 @@ class MainActivity : AppCompatActivity() {
         tl_ac_main_bottom_menu.getTabAt(1)!!.customView = bottomNaviLayout.findViewById(R.id.btn_bottom_navi_home_tab) as RelativeLayout
         tl_ac_main_bottom_menu.getTabAt(2)!!.customView = bottomNaviLayout.findViewById(R.id.btn_bottom_navi_peronsal_tab) as RelativeLayout
     }
+
+
 }

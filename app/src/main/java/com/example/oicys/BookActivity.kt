@@ -50,8 +50,6 @@ class BookActivity : AppCompatActivity() {
 
         // 사물함 예약 상태 받아와서 알려주는 코드 필요 (가장 최근의 로그)
 
-
-
         // 사용자 불러오기
         val user = Firebase.auth.currentUser
         if (user != null) {
@@ -68,7 +66,6 @@ class BookActivity : AppCompatActivity() {
         for(i in 0 until 4){ // 버튼 작업 부여
             reservArray[i].setOnClickListener(){
                 // 새 창 떠서 비밀번호, 날짜 받아오는 코드
-
                 infoSave(i.toString(), "1234", date, "delivery")
                 Toast.makeText(this@BookActivity, "버튼 생성", Toast.LENGTH_SHORT).show()
             }
