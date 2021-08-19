@@ -24,7 +24,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="150dp"
         android:layout_marginLeft="30dp"
-        android:background="@drawable/default_person"/>
+        android:background="@drawable/snow"/>
 
     <EditText
         android:id="@+id/user_name"
