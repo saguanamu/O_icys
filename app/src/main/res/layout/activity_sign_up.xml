@@ -71,17 +71,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/password_verified"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="590dp"
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:textColor="@color/oicysmain"
-        android:fontFamily="@font/tmoney"
-        android:background="@drawable/login"
-        android:hint="Password Verify"/>
 
     <!--Login button-->
     <Button
@@ -93,5 +82,17 @@
         android:fontFamily="@font/tmoney"
         android:background="@drawable/loginbutton"
         android:layout_marginTop="90dp"/>
+
+    <EditText
+        android:id="@+id/password_verified"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/login"
+        android:fontFamily="@font/tmoney"
+        android:hint="Password Verify"
+        android:inputType="textPassword"
+        android:layout_marginTop="630dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/oicysmain" />
 
 </RelativeLayout>
