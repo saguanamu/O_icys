@@ -29,18 +29,18 @@
         android:gravity="center"
         android:textColor="#424242"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="170dp"
         android:background="@drawable/reservation_box"
         android:elevation="10dp"
         />
 
     <Button
         android:id="@+id/reserv_1"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/btshadow"
         android:elevation="10dp"
         android:fontFamily="@font/tmoney"
@@ -50,11 +50,11 @@
 
     <Button
         android:id="@+id/reserv_2"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="100dp"
         android:background="@drawable/btshadow"
         android:elevation="10dp"
         android:fontFamily="@font/tmoney"
@@ -65,7 +65,7 @@
 
     <Button
         android:id="@+id/reserv_3"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:background="@drawable/btshadow"
         android:elevation="10dp"
@@ -74,13 +74,13 @@
         android:textColor="#424242"
         android:textSize="30dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="480dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginRight="100dp"
         />
 
     <Button
         android:id="@+id/reserv_4"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="150dp"
         android:fontFamily="@font/tmoney"
         android:text="4번"
@@ -89,8 +89,8 @@
         android:background="@drawable/btshadow"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="480dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="100dp"
         />
 
     <TextView

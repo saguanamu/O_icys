@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                     val firebaseUser = firebaseAuth.currentUser
                     val email = firebaseUser!!.email
                     updateUI(firebaseUser)
-                    Toast.makeText(this, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Logged In as $email", Toast.LENGTH_SHORT).show()
                 } else {
                     //login failed
                     progressDialog.dismiss()
