@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
         val cal = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
         val date: Date = df.parse("2021-08-19T12:30:30+0530")
-        Toast.makeText(context, "테스트", Toast.LENGTH_SHORT).show()
+
 
         // 예약 가능한 사물함에 한하여 클릭 가능하게
         val postListener = object : ValueEventListener {
@@ -147,7 +147,7 @@ class HomeFragment : Fragment() {
                 val inputData = args?.get("pw")
                 val reservData = args?.get("stat")
                 infoSave(i+1, inputData.toString(), date, reservData.toString())
-                Toast.makeText(context, "버튼 생성", Toast.LENGTH_SHORT).show()
+
             }
         }
 

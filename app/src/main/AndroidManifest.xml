@@ -15,8 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Oicys"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/Theme.Oicys">
         <activity android:name=".ProfileActivity"></activity>
 
 
@@ -35,8 +34,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity"/>
         <activity android:name=".BookActivity"/>
-        <activity android:name=".Reservation"/>
-        <activity android:name=".MainActivity" />
+
 
     </application>
 
