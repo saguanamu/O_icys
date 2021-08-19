@@ -17,7 +17,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
 
     //ActionBar
-    private lateinit var actionBar: ActionBar
+    //private lateinit var actionBar: ActionBar
 
     //ProgressDialog
     private lateinit var progressDialog: ProgressDialog
@@ -50,7 +50,6 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         //handle click, begin signup
-
         binding.signupBtn.setOnClickListener {
             //validate data
             validateData()
@@ -62,11 +61,16 @@ class SignUpActivity : AppCompatActivity() {
         //get data
         email = binding.emailEt.text.toString().trim()
         password = binding.passwordEt.text.toString().trim()
+        val regex = "sookmyung.ac.kr".toRegex()
+        val match = regex.find(email)
 
         //validate data
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             //invalid email format
             binding.emailEt.error = "Invalid email format"
+        }
+        else if(match == null){
+            binding.emailEt.error = "Enter SOOKMYUNG email"
         }
         else if (TextUtils.isEmpty(password)){
             //password isn't entered
