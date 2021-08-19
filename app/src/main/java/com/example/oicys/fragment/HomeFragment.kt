@@ -1,6 +1,11 @@
 package com.example.oicys.fragment
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +56,7 @@ class HomeFragment : Fragment() {
     // 사물함 상태 저장 (배달, 거래, 임시보관, 대여 가능, 연체)
     var statArray = arrayOf("delivery", "transaction", "store", "empty", "delay")
     val df: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-
+    val df2: DateFormat = SimpleDateFormat("d일 HH시간 mm분")
 
     private var mDatabaseRef: DatabaseReference? = null
     private var mDatabase: DatabaseReference? = null
@@ -69,19 +74,13 @@ class HomeFragment : Fragment() {
         mDatabase = FirebaseDatabase.getInstance().reference
 
         // 사물함 버튼
-        var reservArray = arrayOf(view.reserv_1, view.reserv_2,
+        val reservArray = arrayOf(view.reserv_1, view.reserv_2,
             view.reserv_3, view.reserv_4)
         // 사물함 상태
         var sttArray = arrayOf("null","null","null","null")
 
 
-        // 사용자 불러오기
-        val user = Firebase.auth.currentUser
-        if (user != null) {
-            // User is signed in
-        } else {
-            // No user is signed in
-        }
+
 
         val cal = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -119,9 +118,6 @@ class HomeFragment : Fragment() {
                         Log.i("TAG: this value is ", "empty")
                     }
                 }
-
-
-
                 }
 
             }
@@ -137,11 +133,7 @@ class HomeFragment : Fragment() {
         mDatabaseRef!!.child("3").addValueEventListener(postListener)
         mDatabaseRef!!.child("4").addValueEventListener(postListener)
 
-        // 사물함에 적용
-        for(i in 0 until 4){ // 예약 상태에 따라 스타일 변화
 
-            Log.i("TAG: sttArray is ", sttArray[i])
-        }
 
         for(i in 0 until 4){ // 버튼 작업 부여
             reservArray[i].setOnClickListener(){
@@ -152,6 +144,89 @@ class HomeFragment : Fragment() {
             }
         }
 
+
+        // 사용자 정보 업데이트
+
+
+
+// 사용자 불러오기
+        val user = Firebase.auth.currentUser
+
+        if (user != null) {
+            // User is signed in
+            val userInfo1Listener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // 유저 예약 정보 불러오기
+
+                    val user1 = Firebase.auth.currentUser
+                    val uid = user?.uid
+                    val post : String? = dataSnapshot.child("users/$uid/status").getValue(String::class.java)
+                    val num : String? = dataSnapshot.child("users/$uid/lockerNumber").getValue(Long::class.java).toString()
+                    val testDate : String? = dataSnapshot.child("lockers/1/lockerEndDate").getValue(String::class.java)
+
+                    Log.i("TAG: ", uid+post+num+testDate+"go")
+                    val nm:Int?
+                    if (num != null && num != "null") {
+                        nm= parseInt(num)
+                        if (post != null) {
+                            view.tv_userInfo.text = "현재 "+num+"번 사물함을 이용 중입니다."
+
+                            // 남은 시간 안내
+                            val endDate : String? = dataSnapshot.child("lockers/$nm/lockerEndDate").getValue(String::class.java)
+                            val endDate2: Date? = df.parse(endDate)
+                            val now: Long = System.currentTimeMillis()
+                            val date = Date(now)
+
+                            val cal = endDate2?.time?.minus(date?.time)
+                            val calInfo = df2.format(cal)
+
+                            val spannable = SpannableStringBuilder("대여 만료까지  남았습니다.")
+                            spannable.setSpan(
+                                ForegroundColorSpan(Color.BLUE),
+                                7, // start
+                                8, // end
+                                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                            )
+                            spannable.insert(8, calInfo)
+
+                            view.tv_timeInfo.text = spannable
+
+                            Log.i("TAG: ", "success")
+
+                            // 예약된 정보가 있으므로, 나머지 사물함 예약 불가
+                            // 사물함에 적용
+                            for(i in 0 until 4){ // 예약 상태에 따라 스타일 변화
+                                if(nm-1 == i){ // 예약된 사물함
+                                    reservArray[i].setBackgroundResource(R.drawable.btshadow_select)
+                                    reservArray[i].isEnabled = false
+                                } else {
+                                    reservArray[i].setBackgroundResource(R.drawable.btshadow_non)
+                                    reservArray[i].isEnabled = false
+                                }
+                            }
+                        }
+                        Log.i("TAG: ", "정보 없음")
+                    }
+                    Log.i("TAG: ", "num 없음")
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("TAG: ", "loadPost:onCancelled", databaseError.toException())
+                }
+            }
+            mDatabase!!.addValueEventListener(userInfo1Listener)
+        } else {
+            // No user is signed in
+            Log.i("TAG: ", "no user")
+        }
+
+
+
+
+
+
+
+
         return view
 
     }
@@ -160,8 +235,8 @@ class HomeFragment : Fragment() {
 
     fun infoSave(num:Int?, pw:String?, start: Date?, stat:String?){
         val cal = Calendar.getInstance()
-
         val user = Firebase.auth.currentUser
+
 
         if (user != null) {
 
