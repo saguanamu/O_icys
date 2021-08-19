@@ -20,7 +20,7 @@
 
     <TextView
         android:layout_width="380dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/tmoney"
         android:text="대여 만료까지 ~분 남았습니다."
         android:textSize="20dp"

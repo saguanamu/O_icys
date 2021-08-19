@@ -32,8 +32,7 @@
     <!--Email-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTil"
-        android:layout_above="@+id/passwordTil"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="300dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -56,7 +55,8 @@
         app:passwordToggleEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_below="@+id/emailTil"
+        android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/passwordEt"
@@ -71,6 +71,26 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cpasswordTil"
+        app:passwordToggleEnabled="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordTil"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/cpasswordEt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColor="@color/oicysmain"
+            android:fontFamily="@font/tmoney"
+            android:background="@drawable/login"
+            android:hint="Confirm Password"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--Login button-->
     <Button
@@ -81,18 +101,6 @@
         android:layout_below="@+id/passwordTil"
         android:fontFamily="@font/tmoney"
         android:background="@drawable/loginbutton"
-        android:layout_marginTop="90dp"/>
-
-    <EditText
-        android:id="@+id/cpasswordEt"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/login"
-        android:fontFamily="@font/tmoney"
-        android:hint="Password Verify"
-        android:inputType="textPassword"
-        android:layout_marginTop="450dp"
-        android:paddingLeft="10dp"
-        android:textColor="@color/oicysmain" />
+        android:layout_marginTop="110dp"/>
 
 </RelativeLayout>

@@ -7,13 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.oicys.LoginActivity
+import com.example.oicys.ProfileActivity
 import com.example.oicys.R
+import com.example.oicys.SUser
 import com.example.oicys.databinding.FragmentPersonalBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.fragment_personal.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,24 +39,19 @@ class PersonalFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    //private lateinit var logoutButton: Button
-    //private lateinit var logoutButton: Button
-    //ViewBinding
-    //private lateinit var binding: FragmentPersonalBinding
     //FirebaseAuth
-    //private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
     // Email
     private lateinit var emailTv: TextView
-
+    //private lateinit var user_name: EditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         emailTv = view.findViewById(R.id.emailTv)
+        //user_name = view.findViewById(R.id.user_name)
         getUserProfile()
-        //logoutButton = view.findViewById(R.id.logoutBtn)
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,40 +61,7 @@ class PersonalFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        //init firebase auth
-        //checkUser()
-
-        /*
-        //handle click, logout
-        logoutButton.setOnClickListener {
-            firebaseAuth.signOut()
-            activity?.let{
-                val intent = Intent(context, LoginActivity::class.java)
-                startActivity(intent)
-            }
-            //checkUser()
-        }*/
-
     }
-
-    /*
-    private fun checkUser() {
-        //check user is logged in or not
-        val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null){
-            //user not null, user is logged in, get user info
-            val email = firebaseUser.email
-            //set to text view
-            binding.emailTv.text = email
-        }
-        else{ //user is null, user is not logged in, goto login activity
-            activity?.let{
-                val intent = Intent(context, LoginActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,6 +79,22 @@ class PersonalFragment : Fragment() {
                 startActivity(intent)
             }
         }
+
+        /*databaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+        val uname = user_name.text.toString()
+        val user = SUser(uname)
+        databaseReference.setValue(user)*/
+
+
+        /*val bt1 = v.findViewById<Button>(R.id.setting_2)
+        bt1.setOnClickListener {
+            activity?.let{
+                val intent = Intent(context, ProfileActivity::class.java)
+                startActivity(intent)
+            }
+        }*/
+
         return v
     }
 
@@ -134,8 +120,8 @@ class PersonalFragment : Fragment() {
     }
 
     private fun getUserProfile() {
-        // [START get_user_profile]
         val user = Firebase.auth.currentUser
+        // [START get_user_profile]
         user?.let {
             // Name, email address, and profile photo Url
             //val name = user.displayName
@@ -146,6 +132,11 @@ class PersonalFragment : Fragment() {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getToken() instead.
             val uid = user.uid
+            //uid.toString()
         }
+
+        /*database = FirebaseDatabase.getInstance().getReference("Users")
+        val uname = database.child("uname").get()
+        user_name.setText(uname.toString()).toString()*/
     }
 }
